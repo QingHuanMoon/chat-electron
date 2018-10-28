@@ -49,7 +49,6 @@ const actions = {
                     type: 'MloginSuccess'
                 })
                 $$$.$router.push({name: 'MessagePage'})
-                $$$.$store.dispatch('AconnectWs')
             }
         })
     },
@@ -71,6 +70,7 @@ const actions = {
                     type: 'MloginFail'
                 })
                 $$$.$store.dispatch('AcloseWs')
+                $$$.$store.dispatch('AcancelInfo')
             }
         })
     }

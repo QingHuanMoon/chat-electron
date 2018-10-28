@@ -20,7 +20,6 @@ const actions = {
         GetUserListRequest(GET_USER_LIST())
     }
 
-
 }
 
 export default {

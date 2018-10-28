@@ -11,17 +11,16 @@
     name: 'vue-chat',
     data: () => ({
     }),
-    created () {
-        this.$store.dispatch('AcheckLoginStatus')
+    mounted () {
+        this.$nextTick(() => {
+            this.$store.dispatch('AcheckLoginStatus')
+        })
     },
     computed: {
         ...mapState({
             'ws': state => state.user.ws
         })
     },
-    mounted () {
-
-    }
   }
 </script>
 

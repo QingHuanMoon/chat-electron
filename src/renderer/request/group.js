@@ -19,7 +19,7 @@ export const CreateRoom = async (promise) => {
     try {
         let {data} = await promise
         if(data.status === 'success') {
-            $$$.$store.dispatch('AinitRoomList')
+            $$$.$store.dispatch('AinitRoomList', {user_id: $$$.$store.state.auth.userInfo.id})
         }
         return checkStatus(data)
     } catch (e) {

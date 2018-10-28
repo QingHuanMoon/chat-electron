@@ -73,6 +73,7 @@ const mutations = {
         console.log(state.groupList)
     },
     MsetRoomList (state, {data}) {
+        state.groupList = []
         data.forEach(room => {
             state.groupList.push({
                 id: room.room_id,
@@ -128,7 +129,7 @@ const mutations = {
             type: 'other'
         })
         let msgUser = state.messageList.find(item => item.id === id)
-        if (msgUser !== undefined) {
+        if (msgUser !== undefined && state.userInfo.statusId.currentMessage !== msgUser.id ) {
             let num = parseInt(msgUser.content)
             num++
             msgUser.content = '' + num
@@ -156,6 +157,16 @@ const mutations = {
                     GroupMsg(res)
             }
         }
+        // 错误处理,断线重连
+        state.ws.onclose = () => {
+            if ($$$.$store.state.user.ws !== 1 && $$$.$store.state.auth.isLogin) {
+                $$$.$store.dispatch('AconnectWs')
+            }
+        }
+    },
+    McancelInfo (state) {
+        state.contactList = []
+        state.groupList = []
     }
 }
 
@@ -238,6 +249,13 @@ const actions = {
     AinitList ({commit, dispatch}) {
         commit({
             type: 'MinitList'
+        })
+    },
+
+    // 退出清空好友列表
+    AcancelInfo ({commit, dispatch}) {
+        commit({
+            type: 'McancelInfo'
         })
     }
 }

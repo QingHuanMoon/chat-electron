@@ -19,7 +19,6 @@ export const PrivateMsg = (msg) => {
         $$$.$store.dispatch('AsetMessageInUser', {userID, message, time})
         // 存在
     }
-
 }
 
 
